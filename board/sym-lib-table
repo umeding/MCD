@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "morse")(type "KiCad")(uri "${KIPRJMOD}/morse.kicad_sym")(options "")(descr ""))
+)
