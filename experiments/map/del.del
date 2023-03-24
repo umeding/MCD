@@ -1,0 +1,58 @@
+  if (strcmp(elementSequence,".-") == 0)      { decodeChar = 65; }  // A    Letters
+  if (strcmp(elementSequence,"-...") == 0)    { decodeChar = 66; }  // B
+  if (strcmp(elementSequence,"-.-.") == 0)    { decodeChar = 67; }  // C
+  if (strcmp(elementSequence,"-..") == 0)     { decodeChar = 68; }  // D
+  if (strcmp(elementSequence,".") == 0)       { decodeChar = 69; }  // E
+  if (strcmp(elementSequence,"..-.") == 0)    { decodeChar = 70; }  // F
+  if (strcmp(elementSequence,"--.") == 0)     { decodeChar = 71; }  // G
+  if (strcmp(elementSequence,"....") == 0)    { decodeChar = 72; }  // H
+  if (strcmp(elementSequence,"..") == 0)      { decodeChar = 73; }  // I
+  if (strcmp(elementSequence,".---") == 0)    { decodeChar = 74; }  // J
+  if (strcmp(elementSequence,"-.-") == 0)     { decodeChar = 75; }  // K
+  if (strcmp(elementSequence,".-..") == 0)    { decodeChar = 76; }  // L
+  if (strcmp(elementSequence,"--") == 0)      { decodeChar = 77; }  // M
+  if (strcmp(elementSequence,"-.") == 0)      { decodeChar = 78; }  // N
+  if (strcmp(elementSequence,"---") == 0)     { decodeChar = 79; }  // O
+  if (strcmp(elementSequence,".--.") == 0)    { decodeChar = 80; }  // P
+  if (strcmp(elementSequence,"--.-") == 0)    { decodeChar = 81; }  // Q
+  if (strcmp(elementSequence,".-.") == 0)     { decodeChar = 82; }  // R
+  if (strcmp(elementSequence,"...") == 0)     { decodeChar = 83; }  // S
+  if (strcmp(elementSequence,"-") == 0)       { decodeChar = 84; }  // T
+  if (strcmp(elementSequence,"..-") == 0)     { decodeChar = 85; }  // U
+  if (strcmp(elementSequence,"...-") == 0)    { decodeChar = 86; }  // V
+  if (strcmp(elementSequence,".--") == 0)     { decodeChar = 87; }  // W
+  if (strcmp(elementSequence,"-..-") == 0)    { decodeChar = 88; }  // X
+  if (strcmp(elementSequence,"-.--") == 0)    { decodeChar = 89; }  // Y
+  if (strcmp(elementSequence,"--..") == 0)    { decodeChar = 90; }  // Z
+  
+  if (strcmp(elementSequence,".----") == 0)   { decodeChar = 49; }  // 1    Numbers
+  if (strcmp(elementSequence,"..---") == 0)   { decodeChar = 50; }  // 2
+  if (strcmp(elementSequence,"...--") == 0)   { decodeChar = 51; }  // 3
+  if (strcmp(elementSequence,"....-") == 0)   { decodeChar = 52; }  // 4
+  if (strcmp(elementSequence,".....") == 0)   { decodeChar = 53; }  // 5
+  if (strcmp(elementSequence,"-....") == 0)   { decodeChar = 54; }  // 6
+  if (strcmp(elementSequence,"--...") == 0)   { decodeChar = 55; }  // 7
+  if (strcmp(elementSequence,"---..") == 0)   { decodeChar = 56; }  // 8
+  if (strcmp(elementSequence,"----.") == 0)   { decodeChar = 57; }  // 9
+  if (strcmp(elementSequence,"-----") == 0)   { decodeChar = 48; }  // 0
+  
+  if (strcmp(elementSequence,"-.-.--") == 0)  { decodeChar = 33; }  // !    Punctuation
+  if (strcmp(elementSequence,"..--.") == 0)  { decodeChar = 33; }   // !
+  if (strcmp(elementSequence,".-..-.") == 0)  { decodeChar = 34; }  // "
+  if (strcmp(elementSequence,"...-..-") == 0)  { decodeChar = 36; } // $
+  //if (strcmp(elementSequence,".-...") == 0)   { decodeChar = 38; }  // &
+  if (strcmp(elementSequence,".----.") == 0)  { decodeChar = 39; }  // '
+  //if (strcmp(elementSequence,"-.--.") == 0)   { decodeChar = 40; }  // (
+  //if (strcmp(elementSequence,"-.--.-") == 0)  { decodeChar = 41; }  // )
+  //if (strcmp(elementSequence,".-.-.") == 0)   { decodeChar = 43; }  // +
+  if (strcmp(elementSequence,"--..--") == 0)  { decodeChar = 44; }  // ,
+  if (strcmp(elementSequence,"-....-") == 0)  { decodeChar = 45; }  // -
+  if (strcmp(elementSequence,".-.-.-") == 0)  { decodeChar = 46; }  // .
+  if (strcmp(elementSequence,"-..-.") == 0)   { decodeChar = 47; }  // /
+  if (strcmp(elementSequence,"---...") == 0)  { decodeChar = 58; }  // :
+  if (strcmp(elementSequence,"-.-.-.") == 0)  { decodeChar = 59; }  // ;
+  //if (strcmp(elementSequence,"-...-") == 0)   { decodeChar = 61; }  // = (Pause, BT)
+  if (strcmp(elementSequence,"..--..") == 0)  { decodeChar = 63; }  // ?
+  if (strcmp(elementSequence,".--.-.") == 0)  { decodeChar = 64; }  // @
+  if (strcmp(elementSequence,"..--.-") == 0)  { decodeChar = 95; }  // _
+
