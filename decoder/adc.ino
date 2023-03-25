@@ -3,9 +3,10 @@
  *
  * 2023-02-03 uwe <uwe@uwemeding.com> -- created
  */
-#include "adc.h"
+#include "morse.h"
 
-volatile byte adcChannel;
+// the buffers
+// volatile byte adcChannel;
 volatile int adcBuffer[ADC_BUFSIZ];
 volatile int internal__adcBuffer[ADC_BUFSIZ];
 volatile int adcBufPos;
@@ -14,7 +15,6 @@ volatile int adcBufPos;
  * ADC complete ISR. Converted data samples from the ADC are
  * stored in our buffer until it is full. Then we stop the
  * conversion.
- *
  */
 ISR(ADC_vect)
 {
@@ -41,6 +41,7 @@ inline void adcInit()
   TCNT1 = 0;
   TCCR1B = bit(CS11) | bit(WGM12); // CTC, prescaler of 8
   TIMSK1 = bit(OCIE1B);
+
   // PWM duty cycle:  20 uS - sampling frequency 50 kHz
   OCR1A = 39;
   OCR1B = 39;
@@ -57,15 +58,18 @@ inline void adcReset()
 {
   // reset the sample counter
   adcBufPos = 0;
-  // turn ADC on:
-  ADCSRA = bit(ADEN) | bit(ADIE) | bit(ADIF); // want interrupt on completion
+  // turn ADC on: we also want an interrupt on completion
+  ADCSRA = bit(ADEN) | bit(ADIE) | bit(ADIF);
+
   // set the prescaler
-  ADCSRA |= bit(ADPS2) | bit(ADPS1) | bit(ADPS0);
+  //
   // bits set: ADPS2 | ADPS1 | ADPS0 -> 2^7 -> prescale=128.
   // Arduino takes 13 ADC cycles for a single conversion
   // 16MHz (CPU) / 128 / 13 -> ~9600Hz sample freq
+  ADCSRA |= bit(ADPS2) | bit(ADPS1) | bit(ADPS0);
 
-  ADCSRA |= bit(ADATE); // turn on automatic triggering
+  // turn on automatic triggering
+  ADCSRA |= bit(ADATE);
 }
 
 /*
@@ -80,5 +84,5 @@ int *adcWaitForCompletion()
   {
     // stay here until the buffer is full
   }
-  return (int*)memcpy(adcBuffer, internal__adcBuffer, ADC_BUFSIZ * sizeof(int));
+  return (int *)memcpy(adcBuffer, internal__adcBuffer, ADC_BUFSIZ * sizeof(int));
 }

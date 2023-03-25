@@ -4,7 +4,7 @@
  * 2023-02-24 uwe <uwe@uwemeding.com> -- created
  */
 
-#include "goertzel.h"
+#include "morse.h"
 
 // Gortzel algorithm: https://en.wikipedia.org/wiki/Goertzel_algorithm
 
@@ -60,7 +60,7 @@ void gRun(int nsamples, int samples[])
 
 /**
  * Get the squared magnitude.
- *g
+ *
  * @return float the magnitude
  */
 float getMagSquared()

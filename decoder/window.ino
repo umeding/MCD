@@ -4,7 +4,9 @@
  * 2023-02-21 uwe <uwe@uwemeding.com> -- created
  */
 
-#include "window.h"
+#include "morse.h"
+
+float window[ADC_BUFSIZ];
 
 #if WINDOWING == RECTANGLE
 // ===============================================================
@@ -78,12 +80,12 @@ float besselI0(float x)
  * Details: https://en.wikipedia.org/wiki/Kaiser_window
  *
  * as beta goes up, the window narrows
- * beta Window shape
- * 0 Rectangular
- * 5 Similar to a Hamming
- * 6 Similar to a Hann
- * 8.6 Similar to a Blackman
- * 14 is a pretty good starting point
+ * beta window shapes:
+ * 0   - rectangular
+ * 5   - similar to a Hamming
+ * 6   - similar to a Hann
+ * 8.6 - similar to a Blackman
+ * 14  - is a pretty good starting point
  *
  * @param nsamples number of samples
  * @param beta Kaiser beta value
@@ -119,7 +121,7 @@ inline void applyTheWindow(int nsamples, int *samples)
     *samples++ *= window[i];
   }
 }
-int* windowApply(int *samples)
+int *windowApply(int *samples)
 {
   int *org = samples;
   applyTheWindow(ADC_BUFSIZ, samples);

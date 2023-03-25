@@ -24,9 +24,7 @@ void selectionPressed() {
 
 #else
 
-#include "adc.h"
-#include "window.h"
-#include "goertzel.h"
+#include "morse.h"
 
 volatile unsigned long lastTime;
 void setup()
@@ -193,7 +191,7 @@ void loop()
       }
 #endif
 #endif
-      float deltaNormalized = (float)delta / 30.;
+      float deltaNormalized = NORMALIZE_TIMING(delta);
       char type = mapType(deltaNormalized);
 
       // Serial.println("======");
