@@ -15,10 +15,8 @@ float window[ADC_BUFSIZ];
 /**
  * Rectangle window, not much to do, all window values are 1
  */
-void windowInit()
-{
-  for (int i = 0; i < ADC_BUFSIZ; i++)
-  {
+void windowInit() {
+  for (int i = 0; i < ADC_BUFSIZ; i++) {
     window[i] = 1.;
   }
 }
@@ -32,17 +30,14 @@ void windowInit()
  *
  * @param nsamples number of samples
  */
-inline void blackmanWindowInit(int nsamples)
-{
-  for (int i = 0; i < nsamples; i++)
-  {
+inline void blackmanWindowInit(int nsamples) {
+  for (int i = 0; i < nsamples; i++) {
     window[i] = (0.426591 - 0.496561 * cos((2.0 * PI * i) / nsamples) + 0.076848 * cos((4.0 * PI * i) / nsamples));
   }
 }
 
 // Generic window initialization
-void windowInit()
-{
+void windowInit() {
   blackmanWindowInit(ADC_BUFSIZ);
 }
 
@@ -57,18 +52,14 @@ void windowInit()
  * @param x input value
  * @return float calculated
  */
-float besselI0(float x)
-{
+float besselI0(float x) {
   float ax, ans;
   float y;
 
-  if ((ax = fabs(x)) < 3.75)
-  {
+  if ((ax = fabs(x)) < 3.75) {
     y = x / 3.75, y = y * y;
     ans = 1.0 + y * (3.5156229 + y * (3.0899424 + y * (1.2067492 + y * (0.2659732 + y * (0.360768e-1 + y * 0.45813e-2)))));
-  }
-  else
-  {
+  } else {
     y = 3.75 / ax;
     ans = (exp(ax) / sqrt(ax)) * (0.39894228 + y * (0.1328592e-1 + y * (0.225319e-2 + y * (-0.157565e-2 + y * (0.916281e-2 + y * (-0.2057706e-1 + y * (0.2635537e-1 + y * (-0.1647633e-1 + y * 0.392377e-2))))))));
   }
@@ -90,20 +81,17 @@ float besselI0(float x)
  * @param nsamples number of samples
  * @param beta Kaiser beta value
  */
-inline void kaiserWindowInit(int nsamples, float beta)
-{
+inline void kaiserWindowInit(int nsamples, float beta) {
   float A = (nsamples - 1) * (nsamples - 1);
   float B = besselI0(beta);
-  for (int i = 0; i < nsamples; i++)
-  {
+  for (int i = 0; i < nsamples; i++) {
     float C = 2. * (float)i / (float)(nsamples - 1) - 1.;
     window[i] = besselI0(beta * sqrt(1 - C * C)) / besselI0(beta);
   }
 }
 
 // Generic window initialization
-void windowInit()
-{
+void windowInit() {
   kaiserWindowInit(ADC_BUFSIZ, BETA);
 }
 
@@ -114,15 +102,12 @@ void windowInit()
 /**
  * Apply the window to the data sample.
  */
-inline void applyTheWindow(int nsamples, int *samples)
-{
-  for (int i = 0; i < nsamples; i++)
-  {
+inline void applyTheWindow(int nsamples, int *samples) {
+  for (int i = 0; i < nsamples; i++) {
     *samples++ *= window[i];
   }
 }
-int *windowApply(int *samples)
-{
+int *windowApply(int *samples) {
   int *org = samples;
   applyTheWindow(ADC_BUFSIZ, samples);
   return org;
