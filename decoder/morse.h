@@ -77,12 +77,14 @@ extern float getMag();
 // measured values (16MHz Ardunio) = ~35ms
 #define NORMALIZE_TIMING(x) ((float)x / 40.)
 
+// Internal state machine
 #define MORSE_SYMBOL 'S'
 #define MORSE_SYMBOL_CONT '*'
 #define MORSE_LETTER 'L'
 #define MORSE_WORD_SPACE 'W'
-#define MORSE_DONE  'F'
+#define MORSE_DONE 'F'
 
+// Variois serial print detail
 #define MORSE_PRINT_TIMING 0
 #define MORSE_PRINT_CODE 0
 #define MORSE_PRINT_LETTER 1
