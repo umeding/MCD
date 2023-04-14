@@ -7,6 +7,12 @@
  */
 
 // ========================================================
+// Kill switch logic
+#define KILL_SWITCH_PIN 10
+#define RXLED 17
+#define TXLED 30
+
+// ========================================================
 // we use pin A0 to read the analog signal
 #define ADC_PIN 0
 
@@ -84,7 +90,11 @@ extern float getMag();
 #define MORSE_WORD_SPACE 'W'
 #define MORSE_DONE 'F'
 
-// Variois serial print detail
+// Various serial print detail
 #define MORSE_PRINT_TIMING 0
 #define MORSE_PRINT_CODE 0
-#define MORSE_PRINT_LETTER 1
+#define MORSE_PRINT_SERIAL 1
+
+// not enough memory for the LCD to work
+// see code in ../experiments/lcd
+#define MORSE_PRINT_LCD 0

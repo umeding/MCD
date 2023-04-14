@@ -5,6 +5,8 @@
  *  - detect the morse code symbols and letters.
  */
 
+#include "morse.h"
+
 typedef struct MorseLetterMap_s {
   char *morseCode;
   char letter;
@@ -57,6 +59,7 @@ MorseLetter morseLetterMap[] = {
 
     {"-.-.--", '!'},
     {"..--.", '!'},
+    {"-...-", '='},
     {"-.--.", '('},
     {"-.--.-", ')'},
     {".-..-.", '"'},
@@ -110,6 +113,10 @@ void resetDetection(int startValue) {
   morsecodeStart = morsecodeCaptureBuffer;
 }
 
+/**
+ * Handle a symbol continuation. We need this to determine and
+ * distinguish between dits and dahs.
+ */
 void handleSymbolCont() {
   morsecodeSymbolLen++;
 }
@@ -179,27 +186,30 @@ void printMorseCode() {
   Serial.print(pMC);
   Serial.print(" ==> ");
   Serial.println(letter);
+#elif MORSE_PRINT_SERIAL
+  Serial.print(letter);
 #endif
 
-#if MORSE_PRINT_LETTER
-  Serial.print(letter);
+#if MORSE_PRINT_LCD
+  lcdPrint(letter);
 #endif
 }
 
 void printMorseSpace() {
-
 #if MORSE_PRINT_CODE
   Serial.println(">>>  (space)");
+#elif MORSE_PRINT_SERIAL
+  Serial.print(' ');
 #endif
 
-#if MORSE_PRINT_LETTER
-  Serial.print(' ');
+#if MORSE_PRINT_LCD
+  lcdPrint(' ');
 #endif
 }
 
 /**
  * Detect the timing based on the normalized
- * loop timing.
+ * loop timing. Roughly follows the Farnsworth timing.
  *
  * @param deltan normalized timing
  * @return char timing indictor
@@ -257,6 +267,9 @@ void morseBeep(float delta, float mag) {
 
     default:
     case MORSE_WORD_SPACE:
+      if (morsecodeSymbolLen > 0) {
+        handleLetter();
+      }
       handleSpace();
       break;
   }
